@@ -1,42 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  --bg-color: #f4ecd8; /* 紙のような薄いベージュ */
+  --text-color: #2c2c2c;
+  --border-color: #4a4a4a;
+  --accent-color: #8b4513;
+  --highlight-color: #ffd700;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'DotGothic16', 'Sawarabi Gothic', sans-serif;
   margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0);
+  background-size: 24px 24px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.rpg-container {
+  max-width: 800px;
+  margin: 0 auto;
+  border: 4px double var(--border-color);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.rpg-box {
+  border: 2px solid var(--border-color);
+  padding: 15px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+.rpg-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+}
+
+.rpg-button {
+  background: var(--text-color);
+  color: white;
+  border: 2px solid var(--border-color);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.rpg-button:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.rpg-button:active {
+  transform: translateY(0);
+}
+
+.rpg-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border-color);
+  background: #fff;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.active {
+  color: #ffcc00;
+}
+
+h1.main-title {
+  text-align: center;
+  color: #1a1a1a; /* 少し暗めにする */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  letter-spacing: 0.15em; /* 文字間隔を広げる */
+  position: relative;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+h1.main-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+/* --- 演出用アニメーション --- */
+/* 【注釈】@keyframes: アニメーションの「動き」を定義します。
+   0%（開始）から100%（終了）まで、どのように見た目を変化させるかを指定します。 */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%); /* 少し下から開始 */
   }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -60%); /* 上に浮かび上がる */
+  }
+}
+
+.save-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(44, 62, 80, 0.9); /* 濃い紺色でRPGらしく */
+  color: #fff;
+  padding: 20px 40px;
+  border: 2px solid var(--highlight-color);
+  border-radius: 4px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  z-index: 1000;
+  pointer-events: none;
+  animation: fadeInUp 0.5s ease-out forwards;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
